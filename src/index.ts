@@ -18,11 +18,13 @@ export = class SourceBin {
      */
     static async postBin(text: options) {
         if(!text.code) throw new TypeError("Please specify the code to be posted to sourcebin.");
+        if(!text.title) "ㅤ";
         else {
             const get = await axios("https://sourceb.in/api/bins", {
                 method: "POST",
                 data: {
                     files: [{
+                        name: text.title,
                         content: text.code
                     }]
                 }
