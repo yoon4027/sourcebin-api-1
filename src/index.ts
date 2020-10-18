@@ -29,15 +29,20 @@ export = class SourceBin {
             });
             if(get.status === 200) {
                 return `https://sourceb.in/${get.data.key}`
+            } else {
+                 throw new Error("Cannot push the code to sourcebin.");
             }
         }
     }
     static async get(content: get) {
+        if(!content.url) throw new TypeError("You did'nt specify the url to get.");
         const a = await axios(`https://sourceb.in/raw/${content.url}/0`, {
             method: "GET"
         });
         if(a.status === 200) {
             return a.data
+        } else {
+            throw new Error("Cannot get that file.")
         }
     }
 }
